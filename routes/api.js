@@ -8,7 +8,9 @@ const auth = require('../middlewares/auth')
 const express = require('express')
 const api = express.Router()
 
-api.get('/private', auth, (req, res) => {
+//ROLES => Definir si es por permisos
+
+api.get('/private', auth.isAuth, auth.roleAuthorization( [2] ), (req, res) => {
     res.status(200).send({
         message: 'Tienes acceso'
     })

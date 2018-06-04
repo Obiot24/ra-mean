@@ -3,6 +3,7 @@
 const jwt = require('jwt-simple')
 const moment = require('moment')
 const config = require('../config')
+const bcrypt = require('bcryptjs')
 
 function createToken(user) {
     const payload = {
@@ -10,7 +11,6 @@ function createToken(user) {
         iat: moment().unix(),
         exp: moment().add(14, 'days').unix()
     }
-
     return jwt.encode(payload, config.SECRET_TOKEN)
 }
 
