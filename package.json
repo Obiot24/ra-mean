@@ -22,7 +22,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "npm test && node index.js"
+    "start": "npm test && cd client && ng build && cd ../ && node index.js ",
+    "serve:prod": "npm test && cd client && ng build && cd ../ && node index.js "
   },
   "repository": {
     "type": "git",

@@ -9,8 +9,4 @@ const path = require('path')
 //     res.sendFile(path.resolve('./dist/index.html'))
 // })
 
-web.get('/', (req,res)=>{
-    res.send("LOL")
-})
-
 module.exports = web
