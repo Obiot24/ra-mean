@@ -22,6 +22,7 @@
   },
   "scripts": {
     "test": "jest",
+    "install": "cd client && npm i",
     "start": "npm test && cd client && ng build && cd ../ && node index.js ",
     "serve:prod": "npm test && cd client && ng build && cd ../ && node index.js "
   },
