@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Obiot24/ra-mongo.git"
+    "url": "git+https://github.com/Obiot24/ra-mean.git"
   },
   "author": "Juan Andres Rodriguez Arenas",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Obiot24/ra-mongo/issues"
+    "url": "https://github.com/Obiot24/ra-mean/issues"
   },
-  "homepage": "https://github.com/Obiot24/ra-mongo#readme"
+  "homepage": "https://github.com/Obiot24/ra-mean#readme"
 }
