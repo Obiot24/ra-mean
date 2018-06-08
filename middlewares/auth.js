@@ -21,22 +21,41 @@ const isAuth = (req, res, next) => {
     }
 }
 
+//RBAC 
 const roleAuthorization = function(roles){ 
-    return function(req, res, next){ 
-        //ACA PUEDE CAMBIAR DEPENDIENDO EL TOKEN "COMO ALMACENE LOS DATOS"
+    return function(req, res, next){         
         var user = req.user; 
-        User.findById(user, function (err, userQ) {
-            if (err || userQ == null) {
+        User.findById(user, 'roles')
+        .populate({
+            path: 'roles',
+            select: 'permissions',
+            populate: {
+                path: 'permissions',
+                select: 'name',
+                match: { name: roles }
+            }
+        })
+        .exec( function (err, userQ) {
+
+            if (!userQ || err) {
+
                 res.status(401).json({
                     error: 'No user found.'
                 });
                 return next('Unauthorized');
-            } 
-            if (roles.indexOf(userQ.role) > -1) {
+
+            }  
+
+            if (userQ.roles.permissions.length > 0){
                 return next();
-            } 
+            }
+
+            // if (roles.indexOf(result) > -1) {
+            //     return next();
+            // } 
             res.status(401).json({error: 'You are not authorized to view this content'});
-            return next('Unauthorized'); 
+            return next('Unauthorized');
+            
         }); 
     }
 } 

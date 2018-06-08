@@ -1,6 +1,12 @@
 'use strict'
 
-//AUTHENTICATION 
+// GET     controller/ controller.index
+// POST    controller/ controller.create
+// GET     controller/:id  controller.show
+// PUT     controller/:id  controller.update
+// DELETE  controller/:id  controller.delete
+
+// MIDDLEWARES 
 const auth = require('../middlewares/auth')
 
 //EXPRESS ROUTER 
@@ -8,28 +14,27 @@ const auth = require('../middlewares/auth')
 const express = require('express')
 const api = express.Router()
 
-//ROLES => Definir si es por permisos
-
-api.get('/private', auth.isAuth, auth.roleAuthorization( [2] ), (req, res) => {
+// EXAMPLE AUTHORIZATION RBAC
+api.get('/private', auth.isAuth, auth.roleAuthorization(["permiso 1"]), (req, res) => {
     res.status(200).send({
         message: 'Tienes acceso'
     })
 })
 
+// Role-based access control RBAC
+
 const userCtrl = require('../controllers/user')
+api.get('/users', userCtrl.getUsers)
 api.post('/signup', userCtrl.signUp)
 api.post('/signin', userCtrl.signIn)
 
-//GET     controller/ controller.index
-//POST    controller/ controller.create
-//GET     controller/:id  controller.show
-//PUT     controller/:id  controller.update
-//DELETE  controller/:id  controller.delete
+const roleCtrl = require('../controllers/role')
+api.get('/role', roleCtrl.getRoles)
+api.post('/role', roleCtrl.create)
+api.put('/role', roleCtrl.update)
 
-//HOME CONTROLLER
-// const HomeCtrl = require('../controllers/home')
-// api.get(['/', '/Home'], passport.authenticate('jwt', {
-//     session: false
-// }), HomeCtrl.index)
+const permissionCtrl = require('../controllers/permission')
+api.get('/permission', permissionCtrl.getPermissions)
+api.post('/permission', permissionCtrl.create)
 
 module.exports = api
