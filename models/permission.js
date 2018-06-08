@@ -3,11 +3,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const BookSchema = Schema ({
-    title: String,
-    page: String,
+const PermissionSchema = Schema({
+    name: String,
     createdAt: { type: Date, default: Date.now },
     updatedAt: Date
 })
 
-module.exports = mongoose.model('Book', BookSchema)
+module.exports = mongoose.model('Permission', PermissionSchema)

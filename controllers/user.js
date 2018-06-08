@@ -3,6 +3,19 @@
 const User = require('../models/user')
 const serviceAuth = require('../services/auth')
 
+function getUsers(req, res) {
+
+    User.find({})
+    .populate({
+        path:'roles', 
+        populate: { path: 'permissions' }
+    })
+    .exec(function (error, users) {
+        res.json(users)
+    })
+    
+}
+
 function signUp(req, res) {
 
     const user = new User({
@@ -10,7 +23,8 @@ function signUp(req, res) {
         username: req.body.username,
         name: req.body.name,
         lastname: req.body.lastname,
-        password: req.body.password
+        password: req.body.password,
+        roles: req.body.roles
     }) 
     
     user.save((err) => {
@@ -57,5 +71,6 @@ function signIn(req, res) {
 
 module.exports = {
     signUp,
-    signIn
+    signIn,
+    getUsers
 }
