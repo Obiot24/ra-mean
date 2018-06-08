@@ -29,7 +29,7 @@ function signUp(req, res) {
     
     user.save((err) => {
         if (err) return res.status(500).send({
-            message: `Error al crear el usuario: ${err}`
+            message: `Error when creating the user: ${err}`
         })
 
         return res.status(201).send({
@@ -50,19 +50,19 @@ function signIn(req, res) {
             error: err
         })
         if (!user) return res.status(404).send({
-            error: 'No existe el usuario'
+            error: 'No user exists'
         })
 
         user.comparePassword(req.body.password, (err, match) => {
             if (match && !err) {
                 req.user = user
                 res.status(200).send({
-                    message: 'Te has logueado correctamente',
+                    message: 'You have successfully logged in',
                     token: serviceAuth.createToken(user)
                 })
             }else{
                 return res.status(404).send({
-                    error: 'Contraseña equivocada'
+                    error: 'Wrong password'
                 })
             }
         });

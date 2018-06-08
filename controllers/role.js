@@ -3,6 +3,7 @@
 const Role = require('../models/role')
 
 function getRoles(req, res) {
+    
     Role.find({}).populate('permissions')
     .exec(function (error, roles) {
         res.json(roles)

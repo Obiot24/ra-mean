@@ -21,9 +21,6 @@ function create(req, res) {
 
 }
 
-function getPermissions( req, res){
-
-}
 function getPermissions(req, res) {
     Permission.find({}).exec(function (error, permissions) {
         res.json(permissions)

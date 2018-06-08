@@ -1,7 +1,7 @@
 {
   "name": "ra-mongo",
   "version": "1.0.0",
-  "description": "Marco de trabajo para crear aplicaciones spa con mongo y express",
+  "description": "Framework for creating spa applications with mongo and express",
   "dependencies": {
     "express": "^4.16.3",
     "body-parser": "^1.18.3",
