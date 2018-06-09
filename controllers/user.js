@@ -49,7 +49,7 @@ function signIn(req, res) {
         if (err) return res.status(500).send({
             error: err
         })
-        if (!user) return res.status(404).send({
+        if (!user) return res.status(200).send({
             error: 'No user exists'
         })
 
@@ -61,7 +61,7 @@ function signIn(req, res) {
                     token: serviceAuth.createToken(user)
                 })
             }else{
-                return res.status(404).send({
+                return res.status(200).send({
                     error: 'Wrong password'
                 })
             }
